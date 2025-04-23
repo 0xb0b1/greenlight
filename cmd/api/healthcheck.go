@@ -12,19 +12,25 @@ const (
 )
 
 type Health struct {
-	Status      Status `json:"status"`
 	Environment string `json:"environment"`
 	Version     string `json:"version"`
 }
 
+type EnvelopHealth struct {
+	Status     Status `json:"status"`
+	SystemInfo Health `json:"system_info"`
+}
+
 func (app *application) healthcheckHandler(w http.ResponseWriter, r *http.Request) {
-	data := Health{
-		Status:      StatusAvailable,
-		Environment: app.config.env,
-		Version:     version,
+	env := envelope{
+		"status": StatusAvailable,
+		"system_info": Health{
+			Environment: app.config.env,
+			Version:     version,
+		},
 	}
 
-	if err := app.writeJSON(w, http.StatusOK, data, nil); err != nil {
+	if err := app.writeJSON(w, http.StatusOK, env, nil); err != nil {
 		app.logger.Error(err.Error())
 		http.Error(w, "The server encountered a problem and could not process your request", http.StatusInternalServerError)
 	}
