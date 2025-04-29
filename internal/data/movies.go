@@ -8,10 +8,10 @@ type Movie struct {
 	ID        int64     `json:"id"`
 	CreatedAt time.Time `json:"-"`
 	Title     string    `json:"title"`
-	Year      int32     `json:"year,omitempty"`
-	Runtime   int32     `json:"runtime,omitempty,string"`
+	Year      int32     `json:"year"`
+	Runtime   Runtime   `json:"runtime,omitempty"`
 	Genres    []string  `json:"genres,omitempty"`
-	Version   int       `json:"version"`
+	Version   int       `json:"version,omitempty"`
 }
 
 type MovieGenres struct {
