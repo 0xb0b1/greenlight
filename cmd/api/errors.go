@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -36,6 +37,6 @@ func (app *application) notFoundResponse(w http.ResponseWriter, r *http.Request)
 }
 
 func (app *application) methodNotAllowedResponse(w http.ResponseWriter, r *http.Request) {
-	message := "the requested method is not supported for this resource"
+	message := fmt.Sprintf("the %s method is not supported for this resourcea", r.Method)
 	app.errorResponse(w, r, http.StatusMethodNotAllowed, message)
 }
