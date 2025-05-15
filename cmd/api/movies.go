@@ -12,7 +12,7 @@ import (
 func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		Title   string   `json:"title"`
-		Year    int32    `json:"year"`
+		Year    int32    `json:"year,omitempty"`
 		Runtime int32    `json:"runtime"`
 		Genres  []string `json:"genres"`
 	}
